@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found · Al-Ihsan Learning Centre</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1B3A5C">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;--navy-rich:#0A1C33;--copper:#B8864E;--copper-light:#D4A66A;
+  --cream:#FAF6F1;--white:#fff;--text-muted:#5A6670;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-arabic:'Amiri',serif;
+  --font-body:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:var(--font-body);
+  min-height:100vh;min-height:100svh;
+  background:linear-gradient(160deg,var(--navy-rich) 0%,var(--navy) 60%,#3D8B8B 120%);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  padding:40px 24px;text-align:center;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:560px}
+.logo{height:64px;margin:0 auto 36px;display:block;opacity:.95}
+.bismillah{
+  font-family:var(--font-arabic);direction:rtl;
+  font-size:1.4rem;color:rgba(232,201,146,.85);margin-bottom:20px;
+}
+.eyebrow{
+  font-size:.74rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--copper-light);margin-bottom:16px;
+}
+h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem,6vw,4rem);
+  font-weight:300;line-height:1.1;margin-bottom:20px;
+  letter-spacing:-.005em;
+}
+h1 em{font-style:italic;color:var(--copper-light);font-weight:400}
+.code{
+  font-family:var(--font-display);
+  font-size:clamp(5rem,12vw,8rem);
+  font-weight:300;line-height:1;color:rgba(212,166,106,.35);
+  margin-bottom:8px;letter-spacing:-.02em;
+}
+p{
+  font-size:1rem;color:rgba(255,255,255,.78);
+  line-height:1.8;margin-bottom:36px;max-width:46ch;margin-left:auto;margin-right:auto;
+}
+.actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 30px;
+  font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  border-radius:4px;text-decoration:none;
+  transition:transform .35s,background .3s,box-shadow .3s,color .3s,border-color .3s;
+}
+.btn-primary{background:var(--copper);color:#fff;box-shadow:0 6px 22px rgba(184,134,78,.32)}
+.btn-primary:hover{background:var(--copper-light);transform:translateY(-2px);box-shadow:0 10px 28px rgba(184,134,78,.45)}
+.btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+.btn-ghost:hover{border-color:var(--copper-light);color:var(--copper-light);background:rgba(255,255,255,.06)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <img class="logo" src="assets/logo.png" alt="Al-Ihsan Learning Centre">
+  <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+  <div class="code">404</div>
+  <div class="eyebrow">Page Not Found</div>
+  <h1>This path leads <em>nowhere</em>.</h1>
+  <p>The page you're looking for has moved or never existed. Let's get you back to where the learning, gathering, and giving happens.</p>
+  <div class="actions">
+    <a href="/" class="btn btn-primary">Return Home</a>
+    <a href="/#contact" class="btn btn-ghost">Contact Us</a>
+  </div>
+</div>
+</body>
+</html>
