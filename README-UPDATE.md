@@ -35,3 +35,15 @@ Remove the announcement bar (the div with class "announce" near the top of body)
 
 ## Note
 The Light We Follow PDF poster did not come through in the upload, so the event uses a styled card instead. If you want the poster embedded or downloadable, add the PDF to assets/ as the-light-we-follow-poster.pdf and add a link button in the event-ctas div.
+
+
+## Round 2 changes (this package)
+1. Logo fixed: the header and footer now use an inline SVG logo mark, so the logo always renders regardless of the assets folder. The favicon is also inline SVG now. Your existing assets/logo.png is still referenced only in the structured data for Google.
+2. Hero photo replaced with the learning circle photo of the Centre (assets/hero-gathering.jpg).
+3. The Light We Follow now has a real poster (assets/light-we-follow-poster.jpg, also sized for Instagram at 1080x1350). It replaces the placeholder graphic in the featured event card and opens full size on tap. Feel free to use the same file for WhatsApp and Instagram promotion.
+4. New "Life at Ihsan Centre" photo gallery (11 photos) between the About section and Gatherings.
+5. New "Previous events" section with six past event posters: Raising an Ethical Human Being (Jul 2026), Why Islam is True (May to Jun 2026), Isra wal Mi'raj (Jan 2026), The Maghazi (Fall 2025), Milad-un-Nabi (Sept 2025), and Reflect Renew Reconnect (Jun 2025).
+6. Footer links added for the gallery and previous events.
+
+## Files to copy into your repo for this round
+All of assets/ in this zip (18 new gallery and poster images plus the 3 from round 1), plus index.html at the root.
