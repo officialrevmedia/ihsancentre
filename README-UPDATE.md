@@ -47,3 +47,18 @@ The Light We Follow PDF poster did not come through in the upload, so the event 
 
 ## Files to copy into your repo for this round
 All of assets/ in this zip (18 new gallery and poster images plus the 3 from round 1), plus index.html at the root.
+
+
+## Round 3 changes (this package)
+1. Real logo installed. The header uses the full AL-IHSAN LEARNING CENTRE lockup (assets/logo.png), the footer uses a reversed version tuned for the dark navy background (assets/logo-light.png), and the favicon plus iOS home screen icon use the star medallion on its own (assets/logo-mark.png, assets/apple-touch-icon.png). The white background was removed from all of them, so they are transparent PNGs and sit cleanly on any colour.
+2. Four images the old site relied on (about.jpg, hub-gathering.jpg, hub-khidma.jpg, hub-youth.jpg) were rebuilt from your uploaded photos, so this package is now fully self-contained. Nothing depends on files already on the server.
+3. Removed three duplicate photos that appeared in both the hub cards and the gallery, and added a course session photo, so every photo on the site now appears exactly once.
+
+## Verified before packaging
+- 28 of 28 image references resolve to real, valid image files. No broken links, no orphan files.
+- All 28 img tags have descriptive alt text.
+- HTML tag structure validated, no unclosed tags.
+- No em dashes anywhere in the file.
+
+## Upload instructions (important)
+Unzip this package on your computer FIRST, then in GitHub use Add file, Upload files and drag in index.html, sitemap.xml, robots.txt and the whole assets folder together in one go. Uploading files individually is what corrupted index.html last time. Confirm index.html sits at the repo root and opens as readable HTML on GitHub before you check the live site.
