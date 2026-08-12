@@ -439,7 +439,9 @@ footer a:hover{color:var(--gold-light)}
 .past-card{background:var(--cream);border:1px solid rgba(176,138,79,.22);border-radius:14px;overflow:hidden;transition:transform .2s ease, box-shadow .2s ease}
 .past-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
 .past-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
-.past-card.wide img{aspect-ratio:16/10}
+.past-card.wide{grid-column:span 2}
+.past-card.wide img{aspect-ratio:16/9.5;object-fit:contain;background:var(--cream-2)}
+@media (max-width:560px){.past-card.wide{grid-column:span 1}}
 .past-card div{padding:16px 18px 18px}
 .past-card h3{font-size:16.5px;margin-bottom:4px;line-height:1.3}
 .past-card p{font-size:13px;color:var(--muted)}
@@ -711,6 +713,7 @@ footer a:hover{color:var(--gold-light)}
       <figure><img src="assets/gallery-youth-project.jpg" alt="Youth presenting a research project on the journey of Malcolm X" loading="lazy"><figcaption>Youth inquiry projects</figcaption></figure>
       <figure><img src="assets/gallery-nikkah.jpg" alt="The Centre elegantly decorated for a nikkah ceremony" loading="lazy"><figcaption>Nikkah ceremonies at the Centre</figcaption></figure>
       <figure><img src="assets/gallery-media.jpg" alt="Recording an Islamic lesson at the Centre" loading="lazy"><figcaption>Lessons &amp; media</figcaption></figure>
+      <figure><img src="assets/gallery-fundraiser.jpg" alt="Families seated at a community fundraiser dinner beside an Al-Ihsan banner" loading="lazy"><figcaption>Community fundraisers</figcaption></figure>
       <figure><img src="assets/gallery-lecture.jpg" alt="A course session in progress at Al-Ihsan Learning Centre" loading="lazy"><figcaption>Courses for adults</figcaption></figure>
       <figure><img src="assets/gallery-signage.jpg" alt="The Al-Ihsan Learning Centre interior and illuminated logo" loading="lazy"><figcaption>Our home in Ancaster</figcaption></figure>
       </div>
@@ -762,10 +765,6 @@ footer a:hover{color:var(--gold-light)}
         <div><h3>Why Islam is True</h3><p>Eight-session course · May to June 2026</p></div>
       </article>
       <article class="past-card reveal">
-        <img src="assets/past-isra-miraj.jpg" alt="Poster for Traversing the Cosmos, lessons from the night of ascension for Isra wal Miraj" loading="lazy">
-        <div><h3>Traversing the Cosmos: Isra wal Mi'raj</h3><p>Community event · January 26, 2026</p></div>
-      </article>
-      <article class="past-card reveal">
         <img src="assets/past-maghazi.jpg" alt="Poster for The Maghazi, a family program on the Seerah based on the work of Musa ibn Uqbah" loading="lazy">
         <div><h3>The Maghazi: A Family Seerah Program</h3><p>Five-week program · Fall 2025</p></div>
       </article>
@@ -774,6 +773,10 @@ footer a:hover{color:var(--gold-light)}
         <div><h3>Milad-un-Nabi: The Prophetic Way</h3><p>Mawlid gathering · September 12, 2025</p></div>
       </article>
       <article class="past-card reveal">
+        <img src="assets/past-family-festival.jpg" alt="Poster for the Family Festival celebrating the Islamic New Year 1447 at Ancaster Fairgrounds, featuring Shaykh Mahdi Lock, bouncy castles, nasheeds, and free lunch" loading="lazy">
+        <div><h3>Family Festival: Renew, Reflect, Reconnect</h3><p>Islamic New Year 1447 · June 29, 2025</p></div>
+      </article>
+      <article class="past-card wide reveal">
         <img src="assets/past-islamic-new-year.jpg" alt="Poster for Reflect, Renew, Reconnect, celebrating the Islamic New Year 1447" loading="lazy">
         <div><h3>Reflect, Renew, Reconnect</h3><p>Islamic New Year 1447 · June 29, 2025</p></div>
       </article>

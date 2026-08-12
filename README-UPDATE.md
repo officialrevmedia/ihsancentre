@@ -62,3 +62,15 @@ All of assets/ in this zip (18 new gallery and poster images plus the 3 from rou
 
 ## Upload instructions (important)
 Unzip this package on your computer FIRST, then in GitHub use Add file, Upload files and drag in index.html, sitemap.xml, robots.txt and the whole assets folder together in one go. Uploading files individually is what corrupted index.html last time. Confirm index.html sits at the repo root and opens as readable HTML on GitHub before you check the live site.
+
+
+## Round 4 changes (this package)
+1. The Light We Follow now uses your correct poster (the Green Dome design with Shaykh Jamal al-Zahabi's photo), on the left side of the featured event card.
+2. Removed the Traversing the Cosmos: Isra wal Mi'raj event from Previous events, and deleted its image file.
+3. Reflect, Renew, Reconnect is no longer cropped. That poster is a wide banner, and it was being forced into a tall 4:5 card frame. It now spans two columns and displays complete. On phones it drops back to one column, still uncropped.
+4. Added the Family Festival poster (Islamic New Year 1447, Ancaster Fairgrounds) to Previous events.
+5. Added the community fundraiser photo to the gallery.
+
+Previous events now reads, newest first: Raising an Ethical Human Being, Why Islam is True, The Maghazi, Milad-un-Nabi, Family Festival, Reflect Renew Reconnect.
+
+Note: the Family Festival poster and the Reflect Renew Reconnect banner are both for the same June 29, 2025 event. Both are currently shown as separate cards. If you would rather show only one, delete whichever article block you do not want from the past-grid section.
