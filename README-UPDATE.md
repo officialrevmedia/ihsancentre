@@ -74,3 +74,73 @@ Unzip this package on your computer FIRST, then in GitHub use Add file, Upload f
 Previous events now reads, newest first: Raising an Ethical Human Being, Why Islam is True, The Maghazi, Milad-un-Nabi, Family Festival, Reflect Renew Reconnect.
 
 Note: the Family Festival poster and the Reflect Renew Reconnect banner are both for the same June 29, 2025 event. Both are currently shown as separate cards. If you would rather show only one, delete whichever article block you do not want from the past-grid section.
+
+
+## Round 5 changes (this package)
+
+### 1. Four levels, not five
+Every reference to "five levels" is now "four levels":
+- Hero stat block: 5 Levels is now 4 Levels
+- Section heading: "Four levels, rooted in tradition"
+- Button: "Explore the Four Levels"
+- Course structured data for Google: "across four age-based levels"
+- The Grape Tree card previously read "Two levels (ages 6 to 7 and 8 to 9)", which
+  contradicted a four-level count. It now reads "Two age groups (6 to 7 and 8 to 9)",
+  so the age split is still shown but the total stays at four.
+
+The four level cards are unchanged: The Fig Tree (4 to 5), The Grape Tree (6 to 9),
+The Pomegranate Tree (9 to 11), The Date Palm Tree (12 to 16).
+
+The flyer artwork has also been corrected. The navy band near the bottom of
+assets/enlightened-hearts-2026-flyer.jpg read "Five Levels, Rooted in Tradition" and now reads
+"Four Levels, Rooted in Tradition". The flyer is set in Fraunces, so the original typeface was
+used for the replacement word, matched on weight, optical size and letter-spacing against the
+surrounding text. "Levels, Rooted in Tradition" is untouched original artwork, nudged 9 pixels
+right to make room for the wider word. Nothing else on the flyer changed, and the registration
+QR code still resolves to the correct Zeffy link.
+
+The filename is unchanged, so the flyer also updates automatically wherever it is used as the
+link preview image for Facebook, WhatsApp and X. If you re-export the flyer from your own
+design file later, just save over the same path and filename.
+
+The four tree columns at the bottom of the flyer are unchanged, including the Grape Tree's
+"Level 1: Ages 6 to 7 / Level 2: Ages 8 to 9" split. That now matches the "two age groups"
+wording on the website.
+
+### 2. The Light We Follow is finished
+- The featured event section has been removed from the top of the page.
+- The event now appears as the newest card in Previous events, dated August 23, 2026,
+  reusing the same poster. That card uses a new "tall" style so the 2:3 poster shows
+  complete instead of being cropped into the 4:5 card frame.
+- The event's Google structured data block has been deleted, so the site no longer
+  advertises a past event as upcoming.
+- The Zeffy ticket link for the event has been removed from the footer.
+- The Open Graph description no longer mentions the event.
+- The old #events anchor still works. It now lands on the Gatherings and Programs
+  section, so the Events nav link and any existing shared links keep working.
+
+### 3. Registration push
+- The announcement bar is now a continuous scrolling bar with three messages:
+  Enlightened Hearts registration, the four levels and fees, and The Olive Tree.
+  It pauses when you hover or tab into it, and collapses to a single static line for
+  visitors who have reduced motion turned on.
+- The main hero button now goes straight to the Zeffy registration form instead of
+  scrolling down the page. The second button goes to the program details.
+- A highlighted note was added under the Enlightened Hearts heading: classes begin
+  September 13, 2026, register now, with the info@ihsancentre.org address for questions.
+
+### Verified before packaging
+- 29 of 29 image references resolve to real files. No broken links, no orphan files.
+- Flyer edit confined to the heading area, background matched to the surrounding navy,
+  and the QR code re-tested and still decoding to the Zeffy registration page.
+- All 27 img tags have descriptive alt text.
+- All three JSON-LD blocks parse as valid JSON.
+- Every internal #anchor link resolves to an element that exists.
+- HTML tag structure balanced, no unclosed tags. No em dashes anywhere.
+- Rendered and checked at desktop and mobile widths, and with reduced motion enabled.
+
+### Upload instructions
+Unzip this package on your computer FIRST, then in GitHub use Add file, Upload files and
+drag in index.html, sitemap.xml, robots.txt and the whole assets folder together in one go.
+Uploading files one at a time is what corrupted index.html previously. Confirm index.html
+sits at the repo root and opens as readable HTML on GitHub before checking the live site.
