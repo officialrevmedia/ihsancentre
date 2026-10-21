@@ -5,6 +5,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build import *
 
 HM_DONATE = ZEFFY_DONATE + '?utm_source=healthmarkers'
+# Replace with the Winter Warmth Drive Zeffy campaign link once it is created:
+ZEFFY_WINTER = 'https://www.zeffy.com/en-CA/donation-form/winter-warmth-drive-3?utm_source=website'
 HOME = ('/', 'Home'); PROG = ('/programs/', 'Programs')
 ORG = {"@context": "https://schema.org", "@type": ["EducationalOrganization", "NGO"], "@id": SITE + "/#org",
        "name": "Al-Ihsan Learning Centre", "alternateName": "Ihsan Centre", "url": SITE + "/",
@@ -43,7 +45,7 @@ PROGRAM_CARDS = [
     ('/olive-tree/', 'Fridays · Ages 0 to 4', 'The Olive Tree', 'A preschool circle of stories and song. A parent or guardian joins each class.'),
     ('/markers-of-health/', 'Every other Thursday · Free', 'Markers of Health', 'One health marker per session with Dr. Rehan Zaidi, ND, explained through holistic and Prophetic medicine.'),
     ('/book-club/', 'Every other month · Fridays', 'Book Club', 'Read a book together, then meet at the Centre to talk it through over coffee. New readers welcome.'),
-    ('/brothers-night/', 'Regular evenings', 'Brothers Night', 'An evening for brothers of all ages to sit together, eat, talk and build friendships.'),
+    ('/guys-night/', 'Friday evenings', 'Guys Night', 'Games, good food and brotherhood. Brothers old and new, food and drinks provided.'),
     ('/family-night/', 'Monthly · Launching soon', 'Family Night', 'One evening a month for the whole family: dinner, a short talk, and activities for the kids.'),
     ('/hifz/', 'Launching 2027', 'Hifz Program', "A dedicated path for children to memorize the Qur'an, taught with traditional method and care."),
 ]
@@ -74,6 +76,7 @@ home = f'''
 <div class="upcoming">
 <div class="up"><div class="date"><b>22</b><span>Oct · Thu</span></div><div><h3>Markers of Health, Matters of the Heart</h3><p>7:30 to 8:30 PM with Dr. Rehan Zaidi, ND · In person and live online · Free</p></div><a class="btn btn-sm btn-outline" href="/markers-of-health/">Details</a></div>
 <div class="up"><div class="date"><b>23</b><span>Oct · Fri</span></div><div><h3>Book Club: The AI Mirror</h3><p>7:00 to 8:30 PM · Conversation and coffee · New joiners welcome</p></div><a class="btn btn-sm btn-outline" href="/book-club/">Sign up</a></div>
+<div class="up"><div class="date"><b>1</b><span>Nov · Sun</span></div><div><h3>Winter Warmth Drive drop-off begins</h3><p>Sundays to Dec 6, 10 AM to 1 PM · Coats, socks, toques and essentials</p></div><a class="btn btn-sm btn-outline" href="/winter-drive/">Details</a></div>
 <div class="up"><div class="date"><b>Sun</b><span>Weekly</span></div><div><h3>Enlightened Hearts weekend school</h3><p>10:00 AM to 1:00 PM · Ages 4 to 16 · Late registration still open</p></div><a class="btn btn-sm btn-outline" href="/enlightened-hearts/">Details</a></div>
 </div><p style="margin-top:22px"><a href="/events/">See all events and past gatherings</a></p>""", 'bg-cream', 'events')}
 {sec(f"""<div class="split"><div><p class="eyebrow">Who we are</p><h2 class="section-title">A learning centre <em>run by its community</em></h2>
@@ -96,7 +99,7 @@ prog_body = simple_hero('Programs', 'Programs and <em>gatherings</em>', 'Weekend
         f'<article class="card"><p class="tag">{t}</p><h3>{n}</h3><p>{d}</p><a class="more" href="{u}">Ask for the schedule</a></article>' for t, n, d, u in gather) + '</div>', 'bg-white') + \
     give_band('Keep these programs free and open.', 'Enlightened Hearts subsidizes seats for families who need them, and most adult and family programs cost nothing to attend. Donations cover the difference.')
 page('/programs/', 'Programs | Al-Ihsan Learning Centre, Ancaster',
-     'Every program at Al-Ihsan in Ancaster: weekend school, preschool, Markers of Health, Book Club, Brothers Night, Family Night, Hifz 2027 and Mawlid.',
+     'Every program at Al-Ihsan in Ancaster: weekend school, preschool, Markers of Health, Book Club, Guys Night, Family Night, Hifz 2027 and Mawlid.',
      prog_body, trail=[HOME, PROG])
 
 # ================================================================ ENLIGHTENED HEARTS
@@ -211,16 +214,46 @@ page('/book-club/welcome/', 'Welcome to the Book Club | Al-Ihsan Learning Centre
                  f'<div class="btns"><a class="btn btn-gold" href="{WA_BOOKCLUB}" rel="noopener">Join the WhatsApp group</a><a class="btn btn-outline-light" href="/book-club/">Back to the book club</a></div>'),
      noindex=True)
 
-# ================================================================ BROTHERS NIGHT
-bn = simple_hero('Brothers Night', 'Brothers <em>Night</em>', 'An evening for brothers of all ages to sit together, share a meal, talk, and build friendships that last beyond the evening.',
-                 '<div class="btns"><a class="btn btn-gold" href="#signup">Get the next date</a></div>') + \
-    sec(f'''<div class="split top"><div><h2 class="section-title">What to expect</h2>{ticks(['Food and good company', 'A short reminder or reflection', 'Time to talk, unwind and meet new people', 'Open to brothers of all ages, newcomers included'])}
-    <p class="lead">Dates are announced in our WhatsApp community and by email. Sign up and we will let you know when the next one is on.</p></div>
-    <div id="signup">{form('Brothers Night: keep me posted', CONTACT_FIELDS, 'Send me the next date', '/thank-you/', 'bn-form')}</div></div>''') + \
-    give_band('Sponsor a Brothers Night.', 'Food, supplies and the space for an evening are covered by donors. Sponsoring a night is a simple way to keep it going.')
-page('/brothers-night/', 'Brothers Night | Al-Ihsan Learning Centre, Ancaster',
-     'Brothers Night at Al-Ihsan in Ancaster: food, a short reminder and good company for brothers of all ages. Sign up to hear the next date.',
-     bn, trail=[HOME, PROG, ('/brothers-night/', 'Brothers Night')])
+# ================================================================ GUYS NIGHT
+gn_faq = [('Who is Guys Night for?', 'Brothers of all ages, whether you have been coming to the Centre for years or have never been before.'), ('Is there a cost?', 'No. Food and drinks are provided. Donations and sponsors cover the cost of each night.'), ('How do I find out about the next one?', 'Sign up on this page and we will email you the next date. It is also shared in our WhatsApp community.')]
+gn = simple_hero('Guys Night · Friday evenings', 'Guys <em>Night</em>', 'Games. Good food. Brotherhood. An evening at the Centre for brothers old and new, with food and drinks provided.',
+                 '<div class="btns"><a class="btn btn-gold" href="#signup">RSVP for the next one</a></div>') + \
+    sec(f'''<div class="split top"><div><h2 class="section-title">What to expect</h2>{ticks(['Games and friendly competition', 'Food and drinks provided', 'Good conversation and new friends', 'Open to brothers old and new'])}
+    {facts([('When', 'Friday evenings'), ('Time', '7:30 to 10:00 PM'), ('Where', 'Al-Ihsan Learning Centre'), ('Cost', 'Free')])}
+    <p class="lead">RSVP below so we know how much food to order. We will email you each new date.</p></div>
+    <div id="signup">{form('Guys Night RSVP', CONTACT_FIELDS + [field('Guests', 'Bringing anyone? How many', 'number')], 'RSVP and send me dates', '/thank-you/', 'gn-form')}</div></div>''') + \
+    sec('<h2 class="section-title">Questions</h2>' + faq_block(gn_faq), 'bg-white') + \
+    give_band('Sponsor a Guys Night.', 'Food, games and the space for an evening are covered by donors. Sponsoring a night is a simple way to keep it going.')
+page('/guys-night/', 'Guys Night | Games, Food and Brotherhood at Al-Ihsan, Ancaster',
+     'Guys Night at Al-Ihsan Learning Centre in Ancaster: games, good food and brotherhood for brothers old and new. Friday evenings, food and drinks provided. RSVP online.',
+     gn, trail=[HOME, PROG, ('/guys-night/', 'Guys Night')], ld=[faq_ld(gn_faq)])
+
+# ================================================================ WINTER WARMTH DRIVE
+wd_faq = [('When and where can I drop off items?', 'Sundays from November 1 to December 6, 10 AM to 1 PM, at Al-Ihsan Learning Centre, 487 Shaver Road, Ancaster, by the Musalla.'),
+          ('What should I bring?', 'New warm socks, toques, mittens, scarves, hand warmers, nut-free granola bars, toothbrushes, toothpaste and lip balm. Winter coats in kids and adult sizes are also welcome, new or clean and gently used.'),
+          ('Who receives the kits?', 'Our students pack the kits, and they are delivered to people in need across Ancaster and Hamilton on Sunday, December 13.'),
+          ("Can I give money instead?", f'Yes. <a href="{ZEFFY_WINTER}">Give online</a> and we will use it to fill any gaps in the kits, such as coats and sizes we are short on.')]
+wd_pledge = CONTACT_FIELDS + [field('Helping how', 'How would you like to help?', 'select', options=['Dropping off items', 'Donating winter coats', 'Volunteering to pack kits', 'Helping with delivery on Dec 13', 'More than one of these']),
+             field('Items', 'What are you planning to bring?', 'textarea', rows=3, placeholder='e.g. 10 pairs of socks, 2 kids coats (size 8)')]
+wd = simple_hero('Enlightened Hearts community service project', 'Winter <em>Warmth</em> Drive',
+    'Our students are collecting winter essentials and packing warmth kits for people in need across Ancaster and Hamilton. Drop off items on Sundays, or give online and we will buy what is missing.',
+    f'<div class="btns"><a class="btn btn-gold" href="{ZEFFY_WINTER}" rel="noopener">Give online</a><a class="btn btn-outline-light" href="#pledge">Pledge items or volunteer</a></div>') + \
+    sec(f'''<div class="split top"><div>
+    {facts([('Drop-off', 'Sundays, Nov 1 to Dec 6'), ('Time', '10 AM to 1 PM'), ('Where', '487 Shaver Road, by the Musalla'), ('Delivered', 'Sunday, Dec 13')])}
+    <h2 class="section-title" style="margin-top:28px">New essentials</h2>{ticks(['Warm socks', 'Toques, mittens and scarves', 'Hand warmers', 'Nut-free granola bars', 'Toothbrushes, toothpaste and lip balm'])}
+    <h2 class="section-title" style="margin-top:20px">Also welcome</h2>{ticks(['Winter coats, kids and adult sizes, new or clean and gently used'])}
+    <p class="lead" style="margin-top:18px;font-style:italic">"The best of people are those who bring the most benefit to others." (Prophet Muhammad, peace be upon him, reported by al-Tabarani)</p></div>
+    <div class="flyer">{img('winter-drive-poster', 'Winter Warmth Drive poster: Sundays November 1 to December 6, 10 AM to 1 PM, drop off at 487 Shaver Road, Ancaster, kits delivered December 13', '(max-width:980px) 90vw, 540px')}</div></div>''') + \
+    f'''<section class="give-band"><div class="container give-inner"><div><p class="eyebrow light">Don't have items to give?</p><h2 class="section-title light">Donate and we will purchase kits on your behalf.</h2><p class="lead light">Online gifts buy the coats, sizes and items we run short on, so every kit goes out complete.</p></div>
+    <div class="give-amounts"><a class="amt" href="{ZEFFY_WINTER}" rel="noopener"><strong>$25</strong><span>Socks, mittens and a toque for one kit</span></a><a class="amt" href="{ZEFFY_WINTER}" rel="noopener"><strong>$50</strong><span>A complete warmth kit</span></a><a class="amt" href="{ZEFFY_WINTER}" rel="noopener"><strong>$100</strong><span>A new winter coat</span></a><a class="btn btn-gold" href="{ZEFFY_WINTER}" rel="noopener">Give any amount</a></div></div></section>''' + \
+    sec(f'''<div class="split top"><div><p class="eyebrow">Pledge</p><h2 class="section-title">Tell us how you will help</h2><p class="lead">Let us know what you plan to bring, or sign up to pack and deliver kits. It helps us see what is still needed.</p></div>
+    <div>{form('Winter Warmth Drive pledge', wd_pledge, 'Send my pledge', '/thank-you/', 'pledge')}</div></div>''', 'bg-white', 'pledge') + \
+    sec('<h2 class="section-title">Questions</h2>' + faq_block(wd_faq))
+page('/winter-drive/', 'Winter Warmth Drive | Donate Winter Essentials in Ancaster and Hamilton',
+     'Al-Ihsan Winter Warmth Drive: drop off socks, toques, mittens, coats and essentials Sundays Nov 1 to Dec 6 in Ancaster, or give online. Kits delivered Dec 13.',
+     wd, trail=[HOME, ('/winter-drive/', 'Winter Warmth Drive')], og='winter-drive',
+     ld=[faq_ld(wd_faq), ev('Winter Warmth Drive drop-off', '2026-11-01T10:00:00-05:00', '2026-12-06T13:00:00-05:00',
+         'Drop off winter essentials for warmth kits for people in need across Ancaster and Hamilton. Sundays 10 AM to 1 PM.', '/winter-drive/')])
 
 # ================================================================ FAMILY NIGHT
 fn = simple_hero('Family Night · Launching soon', 'Family <em>Night</em>', 'One evening a month for the whole family. Dinner together, a short talk for the parents, and activities for the kids.',
@@ -255,10 +288,10 @@ dn_faq = [('Is Al-Ihsan Learning Centre a registered charity?', f'Yes. We are a 
           ('Can my business sponsor a program?', 'Yes. Fill in the sponsorship form on this page and we will send you our sponsorship package with recognition options.')]
 funds = [('Enlightened Hearts seats', '$100 sponsors one child for a month, and $900 for the full year. Sponsored seats go to families who could not otherwise attend.'),
          ('Hifz Program 2027', "Teachers, Qur'ans and classroom space for our first cohort of students."),
-         ('Warm winter drive', 'Jackets and food for newcomer families this winter, distributed with our Sunday School families.'),
+         ('Winter Warmth Drive', 'Warmth kits of coats, socks, toques and essentials for people in need across Ancaster and Hamilton. <a href="/winter-drive/">See the drive</a>.'),
          ('Caring for the Centre', 'Roof repairs, winterizing and upkeep of the building every program depends on.'),
          ('Ramadan 2027', 'Community iftars and our Ramadan fundraising night.'),
-         ('Free community programs', 'Markers of Health, Book Club, Brothers Night, Family Night and our Mawlid gatherings.')]
+         ('Free community programs', 'Markers of Health, Book Club, Guys Night, Family Night and our Mawlid gatherings.')]
 spon_fields = [field('Name', 'Your name', required=True), field('Business or organization', 'Business or organization'), field('Email', 'Email', 'email', required=True), field('Phone', 'Phone', 'tel'),
                field('Interest', 'I am interested in', 'select', options=['Sponsoring a program', 'Sponsoring an event or iftar', 'Founding Pillar (major gift)', 'Matching a campaign', 'Not sure yet']),
                field('Message', 'Anything you would like us to know', 'textarea', rows=3)]
@@ -271,7 +304,7 @@ dn = simple_hero('Donate', 'Help keep the Centre <em>open to everyone</em>',
     sec(f'''<div class="split top"><div><p class="eyebrow">Businesses and major donors</p><h2 class="section-title">Sponsor the Centre</h2>
     <p class="lead">Businesses and families can sponsor a program, an event or a Ramadan iftar, with recognition at the Centre, on our website and across our community channels. Our highest level of partnership is the <strong>Founding Pillar</strong>, for gifts of $50,000 or more toward a larger permanent home and the programs it will hold.</p>
     <div class="tiers"><div class="tier feature"><h3>Founding Pillar</h3><div class="price">$50,000+</div><p>Lasting recognition and a direct hand in building the Centre's future.</p></div>
-    <div class="tier"><h3>Program and event sponsors</h3><p style="margin-top:8px">Sponsor a program, a Family Night, a Brothers Night or an iftar. We will send the full package with all levels.</p></div></div></div>
+    <div class="tier"><h3>Program and event sponsors</h3><p style="margin-top:8px">Sponsor a program, a Family Night, a Guys Night or an iftar. We will send the full package with all levels.</p></div></div></div>
     <div>{form('Sponsorship enquiry', spon_fields, 'Send me the sponsorship package', '/thank-you/', 'sponsor')}</div></div>''', 'bg-white', 'sponsor') + \
     sec(f'''<div class="split top"><div><h2 class="section-title">Questions about giving</h2>{faq_block(dn_faq)}</div>
     <div><h2 class="section-title">Other ways to help</h2>{ticks(['<a href="/volunteer/">Volunteer</a> your time on Sundays or at events', '<a href="/rentals/">Book the Centre</a> for your event. Rental income supports our programs', 'Share our programs with friends and family'])}</div></div>''')
@@ -317,6 +350,7 @@ evp = simple_hero('Events', 'Events at <em>the Centre</em>', 'What is coming up,
 <div class="up"><div class="date"><b>22</b><span>Oct · Thu</span></div><div><h3>Markers of Health, Matters of the Heart</h3><p>7:30 to 8:30 PM · Dr. Rehan Zaidi, ND · Free, in person and live</p></div><a class="btn btn-sm btn-outline" href="/markers-of-health/">Details</a></div>
 <div class="up"><div class="date"><b>23</b><span>Oct · Fri</span></div><div><h3>Book Club: The AI Mirror</h3><p>7:00 to 8:30 PM · Conversation and coffee · New joiners welcome</p></div><a class="btn btn-sm btn-outline" href="/book-club/">Sign up</a></div>
 <div class="up"><div class="date"><b>5</b><span>Nov · Thu</span></div><div><h3>Markers of Health</h3><p>7:30 to 8:30 PM · Free</p></div><a class="btn btn-sm btn-outline" href="/markers-of-health/">Details</a></div>
+<div class="up"><div class="date"><b>1</b><span>Nov · Sun</span></div><div><h3>Winter Warmth Drive drop-off begins</h3><p>Sundays to Dec 6, 10 AM to 1 PM · Coats, socks, toques and essentials</p></div><a class="btn btn-sm btn-outline" href="/winter-drive/">Details</a></div>
 <div class="up"><div class="date"><b>Fri</b><span>To Nov 27</span></div><div><h3>The Olive Tree Preschool Circle</h3><p>Fridays 9:30 to 10:30 AM · Ages 0 to 4</p></div><a class="btn btn-sm btn-outline" href="/olive-tree/">Details</a></div>
 </div><p style="margin-top:20px">Want event news by email? <a href="/contact/#newsletter">Sign up for updates</a>.</p>''') + \
     sec('<h2 class="section-title">Past events</h2><div class="past">' + ''.join(

@@ -70,6 +70,7 @@ def form(subject, fields, button, next_path='/thank-you/', fid='form', note=''):
   <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
   <div class="form-grid">{''.join(fields)}</div>
   {n}<button class="btn btn-gold" type="submit">{e(button)}</button>
+  <p class="form-alt">Prefer email? Write to <a href="mailto:info@ihsancentre.org?subject={e(subject).replace(' ', '%20')}">info@ihsancentre.org</a></p>
 </form>'''
 
 CONTACT_FIELDS = [field('Name', 'Your name', required=True), field('Email', 'Email', 'email', required=True),
@@ -82,7 +83,7 @@ NAV = [('/programs/', 'Programs'), ('/events/', 'Events'), ('/rentals/', 'Rental
 def header(path):
     links = ''.join(f'<li><a href="{u}"{" aria-current=page" if path.startswith(u) else ""}>{t}</a></li>' for u, t in NAV)
     return f'''<a href="#main" class="skip-link">Skip to main content</a>
-<div class="topbar"><div class="container">Enlightened Hearts 2026-27 is in session. <a href="/donate/">Sponsor a child's seat</a> and help keep our programs open to every family.</div></div>
+<div class="topbar"><div class="container">Winter Warmth Drive: drop off winter essentials Sundays, Nov 1 to Dec 6. <a href="/winter-drive/">See what to bring or give online</a></div></div>
 <header class="nav">
   <div class="nav-inner">
     <a class="brand" href="/" aria-label="Al-Ihsan Learning Centre home"><img src="/assets/img/logo.webp" alt="Al-Ihsan Learning Centre" width="600" height="157" class="brand-logo"></a>
@@ -146,12 +147,13 @@ FOOTER = f'''<footer>
         <li><a href="/olive-tree/">The Olive Tree Preschool Circle</a></li>
         <li><a href="/markers-of-health/">Markers of Health</a></li>
         <li><a href="/book-club/">Book Club</a></li>
-        <li><a href="/brothers-night/">Brothers Night</a></li>
+        <li><a href="/guys-night/">Guys Night</a></li>
         <li><a href="/family-night/">Family Night</a></li>
         <li><a href="/hifz/">Hifz Program 2027</a></li>
       </ul></div>
       <div><h2 class="fh">Centre</h2><ul>
         <li><a href="/donate/">Donate</a></li>
+        <li><a href="/winter-drive/">Winter Warmth Drive</a></li>
         <li><a href="/rentals/">Rent the Centre</a></li>
         <li><a href="/events/">Events</a></li>
         <li><a href="/about/">About us</a></li>

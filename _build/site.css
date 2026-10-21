@@ -161,3 +161,4 @@ footer p{margin-bottom:8px}
 @media (max-width:600px){body{font-size:16.5px}.form-grid,.contact-cards{grid-template-columns:1fr}.form{padding:22px}.footer-grid{grid-template-columns:1fr}.up{grid-template-columns:1fr;gap:10px}.up .date{border:0;text-align:left;padding:0;display:flex;gap:10px;align-items:baseline}.brand-logo{height:34px}.page-hero.has-photo .ph-img::after{background:rgba(14,35,52,.82)}.gallery{column-gap:10px}.gallery figure{margin-bottom:10px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.form-alt{font-size:13.5px;color:var(--muted);margin-top:12px}.form-status{margin-top:16px;background:var(--olive-pale);border-radius:10px;padding:12px 16px;font-size:15px;color:var(--olive-deep)}.btn[disabled]{opacity:.65;cursor:wait}
