@@ -21,6 +21,53 @@
     });
     return 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n') + '\n');
   }
+  // Success messages shown in place of each form once it has been sent.
+  var SUCCESS = {
+    'vol-form': ['Thank you for signing up!', 'JazakAllahu khayran for offering your time. We have your details and will be in touch soon about how you can help. High school students: let us know if you need your hours signed off.'],
+    'contact-form': ['Message sent', 'Thank you for reaching out. We have received your message and will reply by email as soon as we can.'],
+    'newsletter-form': ['You are subscribed', 'Thank you for joining our mailing list. Watch your inbox for news on programs, events and gatherings at the Centre.'],
+    'sponsor': ['Thank you for your interest', 'We have received your sponsorship enquiry and will email you the sponsorship package soon. JazakAllahu khayran for supporting the Centre.'],
+    'pledge': ['Thank you for your pledge!', 'May Allah reward your generosity. Drop off winter essentials on Sundays, November 1 to December 6, 10 AM to 1 PM, at 487 Shaver Road, Ancaster.'],
+    'gn-form': ['You are on the list!', 'Thanks for your RSVP. We will send you upcoming Guys Night dates by email. See you there, brother.'],
+    'enquire': ['Enquiry received', 'Thank you for your interest in renting the Centre. We will get back to you about availability and pricing soon.'],
+    'fn-form': ['Your family is on the list!', 'Thank you for your interest in Family Night. We will let you know as soon as the first evening is scheduled.'],
+    'hifz-form': ['You are on the interest list', 'Thank you for your interest in the Hifz Program. We will share updates with you as the 2027 program takes shape.'],
+    'mh-form': ['You are signed up for reminders', 'We will email you before each Markers of Health session. You can unsubscribe at any time.'],
+    'join': ['Welcome to the Book Club!', 'You are signed up. Taking you to the next step now so you can join our WhatsApp group...']
+  };
+  var DEFAULT_SUCCESS = ['Thank you!', 'Your submission has been received. We will be in touch soon.'];
+
+  function showSuccess(form) {
+    var msg = SUCCESS[form.id] || DEFAULT_SUCCESS;
+    var box = document.createElement('div');
+    box.className = 'form form-success';
+    box.setAttribute('role', 'status');
+    box.setAttribute('tabindex', '-1');
+    box.innerHTML = '<div class="fs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+      '<h3></h3><p></p>';
+    box.querySelector('h3').textContent = msg[0];
+    box.querySelector('p').textContent = msg[1];
+    if (form.id !== 'join') {
+      var again = document.createElement('button');
+      again.type = 'button';
+      again.className = 'btn btn-sm btn-outline';
+      again.textContent = 'Send another response';
+      again.addEventListener('click', function () {
+        form.reset();
+        var btn = form.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || btn.textContent; }
+        var s = form.querySelector('.form-status'); if (s) s.remove();
+        box.parentNode.replaceChild(form, box);
+        var first = form.querySelector('input:not([type="hidden"]):not(.hp), select, textarea');
+        if (first) first.focus();
+      });
+      box.appendChild(again);
+    }
+    form.parentNode.replaceChild(box, form);
+    box.focus({ preventScroll: true });
+    box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
   function status(form, html) {
     var s = form.querySelector('.form-status');
     if (!s) { s = document.createElement('div'); s.className = 'form-status'; s.setAttribute('role', 'status'); form.appendChild(s); }
@@ -51,7 +98,11 @@
         method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data)
       }).then(function (r) { return r.json(); }).then(function (j) {
         if (done) return; done = true; clearTimeout(timer);
-        if (j && (j.success === true || j.success === 'true')) { window.location.href = next; } else { fallback(); }
+        if (j && (j.success === true || j.success === 'true')) {
+          showSuccess(form);
+          // Book Club continues to its welcome page (WhatsApp link) after the message shows.
+          if (form.id === 'join') setTimeout(function () { window.location.href = next; }, 2500);
+        } else { fallback(); }
       }).catch(function () { if (done) return; done = true; clearTimeout(timer); fallback(); });
     });
   });
