@@ -85,25 +85,29 @@
       var data = {};
       new FormData(form).forEach(function (v, k) { if (k !== '_next' && k !== '_honey') data[k] = v; });
       var mail = mailto(form, subject);
+      // Shown only if sending really fails. No automatic mail app pop-up: that looked like "nothing happened".
       var fallback = function () {
-        status(form, 'We have opened an email with your details filled in. Please press <strong>Send</strong> in your email app. ' +
-          'If nothing opened, <a href="' + mail + '">tap here</a> or email <a href="mailto:' + TO + '">' + TO + '</a>.');
+        status(form, 'Sorry, we could not send your details just now. Please try again in a minute, or ' +
+          '<a href="' + mail + '">send them by email instead</a> (your answers are filled in for you) to ' +
+          '<a href="mailto:' + TO + '">' + TO + '</a>.');
         if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label; }
-        window.location.href = mail;
       };
       if (btn) { btn.dataset.label = btn.textContent; btn.disabled = true; btn.textContent = 'Sending...'; }
+      // FormSubmit can take 20 to 30 seconds to reply, so tell people to wait instead of leaving them guessing.
+      status(form, 'Sending your details. This can take up to 30 seconds, so please keep this page open.');
       var done = false;
-      var timer = setTimeout(function () { if (!done) { done = true; fallback(); } }, 9000);
+      var slow = setTimeout(function () { if (!done && btn) btn.textContent = 'Still sending...'; }, 12000);
+      var timer = setTimeout(function () { if (!done) { done = true; clearTimeout(slow); fallback(); } }, 90000);
       fetch('https://formsubmit.co/ajax/' + TO, {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data)
       }).then(function (r) { return r.json(); }).then(function (j) {
-        if (done) return; done = true; clearTimeout(timer);
+        if (done) return; done = true; clearTimeout(timer); clearTimeout(slow);
         if (j && (j.success === true || j.success === 'true')) {
           showSuccess(form);
           // Book Club continues to its welcome page (WhatsApp link) after the message shows.
           if (form.id === 'join') setTimeout(function () { window.location.href = next; }, 2500);
         } else { fallback(); }
-      }).catch(function () { if (done) return; done = true; clearTimeout(timer); fallback(); });
+      }).catch(function () { if (done) return; done = true; clearTimeout(timer); clearTimeout(slow); fallback(); });
     });
   });
 })();
